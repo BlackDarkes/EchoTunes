@@ -367,6 +367,9 @@ img {
 .navigation-popup__block .navigation-buttons__repeat {
   color: inherit;
 }
+.navigation-popup__block .navigation-buttons__repeat.active {
+  color: #555555;
+}
 @media (max-width: 600px) {
   .navigation-popup__block .navigation-buttons__repeat {
     width: 20px;

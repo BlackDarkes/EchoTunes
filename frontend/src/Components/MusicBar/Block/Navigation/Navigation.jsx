@@ -20,7 +20,9 @@ const Navigation = ({vision,
         lastTrack, 
         togglePlayPause,
         play,
-        nextTrack,}) => {
+        nextTrack,
+        repeat,
+        setRepeat,}) => {
     return ( 
         <div className={vision ? "navigation-popup active-music" : "navigation-popup"}>
             <div className="navigation-popup__block">
@@ -67,7 +69,11 @@ const Navigation = ({vision,
                                 <NextButton/>
                             </button>
                         </div>
-                        <button className="navigation-buttons__repeat">
+                        <button
+                            type="button"
+                            className={`navigation-buttons__repeat ${repeat ? 'active' : ''}`}
+                            onClick={() => setRepeat(!repeat)}
+                        >
                             <RepeatButton/>
                         </button>
                     </div>

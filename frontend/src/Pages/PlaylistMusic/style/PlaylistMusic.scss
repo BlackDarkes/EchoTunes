@@ -26,6 +26,7 @@
 
                 @include tabs() {
                     left: 40px;
+                    top: 35px;
                 }
 
                 @include mobile() {
@@ -41,6 +42,7 @@
 
                 @include tabs() {
                     right: 40px;
+                    top: 35px;
                 }
 
                 @include mobile() {
@@ -104,6 +106,7 @@
             @include tabs() {
                 flex-direction: column-reverse;
                 padding-top: 80px;
+                padding-block: 60px 165px;
             }
 
             @include mobile() {

@@ -30,6 +30,8 @@ const MusicBar = () => {
     const textRef = useRef(null);
     const containerRef = useRef(null);
     const [vision, setVision] = useState(false);
+    const [repeat, setRepeat] = useState(false);
+    const [random, setRandom] = useState(false);
 
     useEffect(() => {
         localStorage.setItem("value", valueSound);
@@ -48,7 +50,14 @@ const MusicBar = () => {
         };
 
         const handleEnded = () => {
-            nextTrack();
+            if (repeat) {
+                newTrack.currentTime = 0;
+                newTrack.play().catch(error => {
+                    console.error("Error playing the track:", error);
+                });
+            } else {
+                nextTrack();
+            }
         };
 
         newTrack.addEventListener('timeupdate', updateTime);
@@ -62,21 +71,7 @@ const MusicBar = () => {
             newTrack.removeEventListener('timeupdate', updateTime);
             newTrack.removeEventListener('ended', handleEnded);
         };
-    }, [index]);
-
-    const enterKey = (event) => {
-        if (event.keyCode === 32) {
-            window.addEventListener("keydown", setPlay(!play))
-        }
-    }
-
-    useEffect(() => {
-        document.addEventListener("keydown", enterKey)
-
-        return () => {
-            document.removeEventListener("keydown", enterKey)
-        }
-    }, [play])
+    }, [index, repeat]);
 
     useEffect(() => {
         if (track) {
@@ -173,8 +168,12 @@ const MusicBar = () => {
                                 <NextMusic/>
                             </button>
                         </div>
-                        <button type="button" className="bar-nav__repeatMusic">
-                            <RepeatMusic/>
+                        <button
+                            type="button"
+                            className={`bar-nav__repeatMusic ${repeat ? 'active' : ''}`}
+                            onClick={() => setRepeat(!repeat)}
+                        >
+                            <RepeatMusic />
                         </button>
                     </div>
                     <div className="bar-sound">
@@ -218,7 +217,9 @@ const MusicBar = () => {
             lastTrack={lastTrack}
             togglePlayPause={togglePlayPause}
             play={play}
-            nextTrack={nextTrack}/>
+            nextTrack={nextTrack}
+            repeat={repeat}
+            setRepeat={setRepeat}/>
         </>
     );
 }

@@ -102,12 +102,17 @@
                 &__repeatMusic {
                     @include flex-center-vertical();
                     color: inherit;
-                    transition: 0.4s;
-
-                    @include hover() {
-                        color: var(--white);
+                    transition: color 0.4s;
+                    
+                    &.active {
+                        color: #555555; 
                     }
                     
+                    &:hover {
+                        color: var(--white);
+                    }
+                
+                
                     @include laptop() {
                         display: none;
                     }
