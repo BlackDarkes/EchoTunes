@@ -228,11 +228,10 @@ img {
 
 .popup {
   position: fixed;
-  padding: 70px 10px 30px 50px;
+  padding: 50px 0 30px 50px;
   top: 0;
   right: 0;
   width: min(100%, 415px);
-  height: 550px;
   background-color: var(--black);
   color: var(--white);
   transform: translateX(100%);

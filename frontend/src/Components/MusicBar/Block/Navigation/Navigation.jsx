@@ -22,7 +22,9 @@ const Navigation = ({vision,
         play,
         nextTrack,
         repeat,
-        setRepeat,}) => {
+        setRepeat,
+        random,
+        setRandom,}) => {
     return ( 
         <div className={vision ? "navigation-popup active-music" : "navigation-popup"}>
             <div className="navigation-popup__block">
@@ -55,7 +57,7 @@ const Navigation = ({vision,
                         </p>
                     </div>
                     <div className="navigation-buttons">
-                        <button className="navigation-buttons__random" >
+                        <button className="navigation-buttons__random" onClick={() => setRandom(!random)}>
                             <RandomButton style={{width: "40px", height: "40px"}}/>
                         </button>
                         <div className="buttons">

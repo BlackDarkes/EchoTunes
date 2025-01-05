@@ -145,6 +145,7 @@ const MusicBar = () => {
                     <div className="bar-nav">
                         <button type="button" className="bar-nav__randomMusic" onClick={(e) => {
                             e.stopPropagation();
+                            setRandom(!random);
                         }}>
                             <RandomMusic/>
                         </button>
@@ -219,7 +220,9 @@ const MusicBar = () => {
             play={play}
             nextTrack={nextTrack}
             repeat={repeat}
-            setRepeat={setRepeat}/>
+            setRepeat={setRepeat}
+            random={random}
+            setRandom={setRandom}/>
         </>
     );
 }
