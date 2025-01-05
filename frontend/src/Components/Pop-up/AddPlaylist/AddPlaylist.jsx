@@ -1,4 +1,5 @@
-import "./style/AddPlaylist.css";
+import React from "react";
+import "./style/AddPlaylist.scss";
 import BurgerClose from "../../AssetsBlocks/AsideBlock/Mobile/BurgerClose";
 import DownloadImage from "./Assets/DownloadImage";
 

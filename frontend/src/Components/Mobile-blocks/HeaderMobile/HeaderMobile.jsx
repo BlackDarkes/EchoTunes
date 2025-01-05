@@ -1,9 +1,9 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import "./style/HeaderMobile.scss";
 import BurgerClose from "../../AssetsBlocks/AsideBlock/Mobile/BurgerClose";
 import BurgerOpen from "../../AssetsBlocks/AsideBlock/Mobile/BurgerOpen";
 import ProfilUser from "../../ProfilUser/ProfilUser";
 import SerchMobile from "./Blocks/SerchMobile/SerchMobile";
-import "./style/HeaderMobile.css";
 import MobileAsideBlock from "../../Pop-up/MobileAsideBlock/MobileAsideBlock";
 
 const HeaderMobile = ({home, library}) => {

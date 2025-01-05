@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-import "./style/AsudeBlock.css";
+import "./style/AsudeBlock.scss";
 import Button from "../Blocks/Button/Button";
 import Home from "../AssetsBlocks/AsideBlock/Home";
 import Labrary from "../AssetsBlocks/AsideBlock/Labrary";

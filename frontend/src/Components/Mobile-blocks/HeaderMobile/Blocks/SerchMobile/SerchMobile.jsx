@@ -1,5 +1,6 @@
+import React from "react";
 import Serch from "../../../../AssetsBlocks/SerchBar/Serch";
-import "./style/SerchMobile.css";
+import "./style/SerchMobile.scss";
 
 const SerchMobile = () => {
     return (

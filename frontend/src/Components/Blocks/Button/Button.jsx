@@ -1,4 +1,5 @@
-import "./style/Button.css";
+import React from "react";
+import "./style/Button.scss";
 
 const Button = ({image, text, classBlock="button"}) => {
     return (

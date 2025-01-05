@@ -1,4 +1,5 @@
-@import "../../../../style/App.scss";
+@use "../../../../style/App.scss";
+@use "../../../../style/bace/media" as *;
 
 .addMusic {
     display: flex;

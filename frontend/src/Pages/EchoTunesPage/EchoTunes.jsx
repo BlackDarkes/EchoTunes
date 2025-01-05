@@ -1,10 +1,11 @@
+import React from 'react';
 import AsideBlock from "../../Components/AsideBlock/AsideBlock";
 import AsideBlockMobile from "../../Components/Mobile-blocks/AsideBlockMobile/AsideBlockMobile";
 import HeaderMobile from "../../Components/Mobile-blocks/HeaderMobile/HeaderMobile";
 import MusicBlock from "../../Components/MusicBlock/MusicBlock";
 import ProfilUser from "../../Components/ProfilUser/ProfilUser";
 import SerchBar from "../../Components/SerchPanel/SearchBar";
-import "./style/EchoTunes.css";
+import "./style/EchoTunes.scss";
 
 const EchoTunes = () => {
     return (

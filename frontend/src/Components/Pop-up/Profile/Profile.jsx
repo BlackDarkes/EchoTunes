@@ -5,9 +5,9 @@ import Download from "./AsetsProfile/Download";
 // import Exit from "./AsetsProfile/Exit";
 import Login from "./AsetsProfile/Login";
 import History from "./AsetsProfile/History";
-import "./style/Profile.css";
+import "./style/Profile.scss";
 import Settings from "./AsetsProfile/Settings";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddMusic from "../AddMusic/AddMusic";
 
 const Profile = ({active, setActive}) => {

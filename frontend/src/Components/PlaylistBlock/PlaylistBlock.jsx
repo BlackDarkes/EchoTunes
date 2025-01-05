@@ -3,7 +3,7 @@
 import React, { useContext, useEffect } from "react";
 import { playlists } from "../../Playlists/playlists"
 import Playlist from "./Block/Playlist";
-import "./style/PlaylistBlock.css";
+import "./style/PlaylistBlock.scss";
 import AddPlaylistImage from "./Assets/AddPlaylistImage";
 import { PlaylistContext } from "../../Contents/AddPlaylistContext";
 

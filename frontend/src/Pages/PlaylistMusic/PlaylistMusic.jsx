@@ -1,9 +1,10 @@
+import React from 'react';
 import { Link, useParams } from "react-router-dom";
 import MusicBlock from "../../Components/MusicBlock/MusicBlock"
 import Back from "../../Components/AssetsBlocks/PlaylistPage/back";
 import ThreePoints from "../../Components/AssetsBlocks/MusicBlock/ThreePoints";
 import { playlists } from "../../Playlists/playlists";
-import "./style/PlaylistMusic.css";
+import "./style/PlaylistMusic.scss";
 
 const PlaylistMusic = () => {
     const { index } = useParams()

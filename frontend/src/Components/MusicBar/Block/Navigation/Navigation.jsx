@@ -1,6 +1,6 @@
 import Close from "../Close/Close";
 import musicImage from "../../../../Assets/Secondary/MusicBlock/КартинкаМузыки.svg"
-import "./style/Navigation.css";
+import "./style/Navigation.scss";
 import { musics } from "../../../../Music/musics";
 import StopMusic from "../../../AssetsBlocks/MusicBar/NavigationMusic/StopMusic";
 import PlayMusic from "../../../AssetsBlocks/MusicBar/NavigationMusic/MusicPlay";
@@ -9,6 +9,7 @@ import RandomButton from "../RandomButton/RandomButton";
 import RepeatButton from "../RepeatButton/RepeatButton";
 import NextButton from "../NextButton/NextButton";
 import PreviousButton from "../PreviousButton/PreviousButton";
+import React from 'react';
 
 const Navigation = ({vision,
         setVision,

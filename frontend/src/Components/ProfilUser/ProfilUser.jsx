@@ -1,5 +1,6 @@
+import React from "react";
 import { useState } from "react";
-import "./style/ProfilUser.css";
+import "./style/ProfilUser.scss";
 import Profile from "../Pop-up/Profile/Profile";
 import UserImage from "../AssetsBlocks/ProfilUser/UserImage";
 

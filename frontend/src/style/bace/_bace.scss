@@ -1,3 +1,5 @@
+@use "./mixins" as *;
+
 body {
     background-image: var(--linear-gradient);
     font-family: "Nunito Sans", serif;
@@ -22,7 +24,7 @@ input, textarea {
     }
 }
 
-a {@include re-style-link();}
+a {@include re-style-link()}
 
 button {@include re-style-button();}
 

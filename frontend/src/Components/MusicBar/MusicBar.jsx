@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
-import { useState, useRef, useEffect, useContext } from "react";
-import "./style/MusicBar.css";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import "./style/MusicBar.scss";
 import { musics } from "../../Music/musics";
 import PlayMusic from "../AssetsBlocks/MusicBar/NavigationMusic/MusicPlay"
 import StopMusic from "../AssetsBlocks/MusicBar/NavigationMusic/StopMusic";
@@ -38,33 +38,48 @@ const MusicBar = () => {
     }, [valueSound]);
 
     useEffect(() => {
+        console.log("Loading track:", musics[index].music);
         const newTrack = new Audio(musics[index].music);
         newTrack.volume = valueSound;
-
+    
+        newTrack.onerror = (e) => {
+            console.error("Ошибка загрузки аудио:", e);
+            console.error("Target:", e.target);
+            console.error("Current Target:", e.currentTarget);
+        };
+    
+        newTrack.addEventListener('canplaythrough', () => {
+            if (play) {
+                newTrack.play().catch(error => {
+                    console.error("Ошибка при воспроизведении трека:", error);
+                });
+            }
+        });
+    
         newTrack.onloadedmetadata = () => {
             setDuration(newTrack.duration);
         };
-
+    
         const updateTime = () => {
             setCurrentTime(newTrack.currentTime);
         };
-
+    
         const handleEnded = () => {
             if (repeat) {
                 newTrack.currentTime = 0;
                 newTrack.play().catch(error => {
-                    console.error("Error playing the track:", error);
+                    console.error("Ошибка при воспроизведении трека:", error);
                 });
             } else {
                 nextTrack();
             }
         };
-
+    
         newTrack.addEventListener('timeupdate', updateTime);
         newTrack.addEventListener('ended', handleEnded);
-
+    
         setTrack(newTrack);
-
+    
         return () => {
             newTrack.pause();
             newTrack.currentTime = 0;
@@ -72,6 +87,9 @@ const MusicBar = () => {
             newTrack.removeEventListener('ended', handleEnded);
         };
     }, [index, repeat]);
+    
+    
+    
 
     useEffect(() => {
         if (track) {

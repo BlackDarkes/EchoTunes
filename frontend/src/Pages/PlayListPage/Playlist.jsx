@@ -1,10 +1,11 @@
+import React from 'react';
 import AsideBlock from "../../Components/AsideBlock/AsideBlock";
 import AsideBlockMobile from "../../Components/Mobile-blocks/AsideBlockMobile/AsideBlockMobile";
 import HeaderMobile from "../../Components/Mobile-blocks/HeaderMobile/HeaderMobile";
 import PlaylistBlock from "../../Components/PlaylistBlock/PlaylistBlock";
 import ProfilUser from "../../Components/ProfilUser/ProfilUser";
 import SerchBar from "../../Components/SerchPanel/SearchBar";
-import "./style/Playlist.css"
+import "./style/Playlist.scss"
 
 const PlaylistPage = () => {
     return (

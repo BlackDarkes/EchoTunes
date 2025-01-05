@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, {useState, useRef, useContext } from "react";
-import "./style/MusicBlock.css";
+import "./style/MusicBlock.scss";
 import Music from "./Blocks/Music";
 import { musics } from "../../Music/musics";
 

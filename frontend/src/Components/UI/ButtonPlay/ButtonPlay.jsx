@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
 const ButtonPlay = ({image1, image2, classe}) => {
     const [play, setPlay] = useState(false)

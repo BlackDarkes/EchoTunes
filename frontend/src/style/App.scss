@@ -1,5 +1,5 @@
-@import "./bace/normalize";
-@import "./bace/variable";
-@import "./bace/mixins";
-@import "./bace/bace";
-@import "./bace/media";
+@use "./bace/normalize" as *;
+@use "./bace/variable" as *;
+@use "./bace/mixins" as *;
+@use "./bace/bace" as *;
+@use "./bace/media" as *;

@@ -1,4 +1,6 @@
-@import "../../../style/App.scss";
+@use "../../../style/App.scss";
+@use "../../../style/bace/media" as *;
+@use "../../../style/bace/mixins" as *;
 
 .asideBlock {
     min-width: 200px;

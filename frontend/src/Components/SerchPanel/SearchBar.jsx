@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
-import "./style/SerchPanel.css";
+import "./style/SerchPanel.scss";
 import Serch from "../AssetsBlocks/SerchBar/Serch";
 
 const SerchBar = () => {

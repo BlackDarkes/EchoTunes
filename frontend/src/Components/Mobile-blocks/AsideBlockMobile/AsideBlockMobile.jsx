@@ -1,4 +1,5 @@
-import "./style/AsideBlockMobile.css";
+import React from "react";
+import "./style/AsideBlockMobile.scss";
 import { Link } from "react-router-dom";
 import HomeMobile from "../../AssetsBlocks/AsideBlock/Mobile/HomeMobile";
 import LabraryMobile from "../../AssetsBlocks/AsideBlock/Mobile/LabraryMobile";

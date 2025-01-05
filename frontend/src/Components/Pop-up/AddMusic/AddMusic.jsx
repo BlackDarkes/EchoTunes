@@ -1,6 +1,7 @@
+import React from "react";
 import DownloadMusic from "./Assets/DownloadMusic";
 import BurgerClose from "../../AssetsBlocks/AsideBlock/Mobile/BurgerClose";
-import "./style/AddMusic.css";
+import "./style/AddMusic.scss";
 
 const AddMusic = ({open, setOpen}) => {
     return (
