@@ -1,6 +1,7 @@
+import React from 'react';
+import "./style/Navigation.scss";
 import Close from "../Close/Close";
 import musicImage from "../../../../Assets/Secondary/MusicBlock/КартинкаМузыки.svg"
-import "./style/Navigation.scss";
 import { musics } from "../../../../Music/musics";
 import StopMusic from "../../../AssetsBlocks/MusicBar/NavigationMusic/StopMusic";
 import PlayMusic from "../../../AssetsBlocks/MusicBar/NavigationMusic/MusicPlay";
@@ -9,7 +10,6 @@ import RandomButton from "../RandomButton/RandomButton";
 import RepeatButton from "../RepeatButton/RepeatButton";
 import NextButton from "../NextButton/NextButton";
 import PreviousButton from "../PreviousButton/PreviousButton";
-import React from 'react';
 
 const Navigation = ({vision,
         setVision,
@@ -58,7 +58,10 @@ const Navigation = ({vision,
                         </p>
                     </div>
                     <div className="navigation-buttons">
-                        <button className="navigation-buttons__random" onClick={() => setRandom(!random)}>
+                        <button
+                            type='button'
+                            className={`navigation-buttons__random ${random ? 'active' : ''}`}
+                            onClick={() => setRandom(!random)}>
                             <RandomButton style={{width: "40px", height: "40px"}}/>
                         </button>
                         <div className="buttons">

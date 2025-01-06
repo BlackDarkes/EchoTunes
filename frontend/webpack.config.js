@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: 'development',
-    entry: './src/index.js', // ваш основной файл
+    entry: './src/index.js', 
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist'),
@@ -11,7 +11,7 @@ module.exports = {
     },
     devServer: {
         static: {
-            directory: path.join(__dirname, 'dist'), // указываем директорию для статических файлов
+            directory: path.join(__dirname, 'dist'), 
         },
         compress: true,
         port: 3000,
@@ -20,7 +20,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/, // добавляем поддержку .jsx
+                test: /\.(js|jsx)$/, 
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -32,26 +32,26 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    'style-loader', // добавляет CSS в DOM
-                    'css-loader',   // интерпретирует @import и url()
-                    'sass-loader',  // компилирует Sass в CSS
+                    'style-loader', 
+                    'css-loader',   
+                    'sass-loader',  
                 ],
             },
             {
-                test: /\.css$/, // добавляем правило для обработки CSS
+                test: /\.css$/,
                 use: [
-                    'style-loader', // добавляет CSS в DOM
-                    'css-loader',   // интерпретирует @import и url()
+                    'style-loader', 
+                    'css-loader',   
                 ],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/, // добавляем правило для обработки изображений
+                test: /\.(png|jpe?g|gif|svg)$/, 
                 use: [
                     {
                         loader: 'file-loader',
                         options: {
-                            name: '[name].[hash].[ext]', // настраиваем имя выходного файла
-                            outputPath: 'assets/', // указываем папку для выходных файлов
+                            name: '[name].[hash].[ext]',
+                            outputPath: 'assets/',
                         },
                     },
                 ],
@@ -72,13 +72,13 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html', // ваш HTML шаблон
+            template: './public/index.html', 
         }),
     ],
     resolve: {
-        extensions: ['.js', '.jsx'], // добавляем .jsx
+        extensions: ['.js', '.jsx'], 
     },
     performance: {
-        hints: false, // Отключить предупреждения о производительности
+        hints: false, 
     },
 };

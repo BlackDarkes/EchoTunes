@@ -64,6 +64,10 @@
                     color: inherit;
                     transition: 0.4s;
 
+                    &.active {
+                        color: #555555; 
+                    }
+
                     @include hover() {
                         color: var(--white);
                     }

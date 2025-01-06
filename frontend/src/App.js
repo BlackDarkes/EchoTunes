@@ -1,11 +1,11 @@
 import React from "react";
-import "./style/App.css";
+import "./style/App.scss";
 import EchoTunes from "./Pages/EchoTunesPage/EchoTunes";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PlaylistPage from "./Pages/PlayListPage/Playlist";
 import PlaylistMusic from "./Pages/PlaylistMusic/PlaylistMusic";
 import MusicBar from "./Components/MusicBar/MusicBar";
-import MusicProvider from "./Contents/MusicsContents"; // Импортируйте ваш провайдер
+import MusicProvider from "./Contents/MusicsContents";
 import PlaylistProvider from "./Contents/AddPlaylistContext";
 import PageNotFound from "./Pages/PageNotFound/PageNotFoun";
 

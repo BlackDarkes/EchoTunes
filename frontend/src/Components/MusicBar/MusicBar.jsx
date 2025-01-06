@@ -33,6 +33,14 @@ const MusicBar = () => {
     const [repeat, setRepeat] = useState(false);
     const [random, setRandom] = useState(false);
 
+    const getRandomTrackIndex = () => {
+        let randomIndex = null;
+        do {
+            randomIndex = Math.floor(Math.random() * musics.length);
+        } while (randomIndex === index);
+        return randomIndex;
+    };
+
     useEffect(() => {
         localStorage.setItem("value", valueSound);
     }, [valueSound]);
@@ -41,55 +49,41 @@ const MusicBar = () => {
         console.log("Loading track:", musics[index].music);
         const newTrack = new Audio(musics[index].music);
         newTrack.volume = valueSound;
-    
+
         newTrack.onerror = (e) => {
             console.error("Ошибка загрузки аудио:", e);
-            console.error("Target:", e.target);
-            console.error("Current Target:", e.currentTarget);
         };
-    
-        newTrack.addEventListener('canplaythrough', () => {
-            if (play) {
-                newTrack.play().catch(error => {
-                    console.error("Ошибка при воспроизведении трека:", error);
-                });
-            }
-        });
-    
+
         newTrack.onloadedmetadata = () => {
             setDuration(newTrack.duration);
         };
-    
+
         const updateTime = () => {
             setCurrentTime(newTrack.currentTime);
         };
-    
+
         const handleEnded = () => {
-            if (repeat) {
-                newTrack.currentTime = 0;
-                newTrack.play().catch(error => {
-                    console.error("Ошибка при воспроизведении трека:", error);
-                });
+            if (random) {
+                const newIndex = getRandomTrackIndex();
+                setIndex(newIndex);
             } else {
                 nextTrack();
             }
+            setPlay(true);
         };
-    
+
         newTrack.addEventListener('timeupdate', updateTime);
         newTrack.addEventListener('ended', handleEnded);
-    
+
         setTrack(newTrack);
-    
+
         return () => {
             newTrack.pause();
             newTrack.currentTime = 0;
             newTrack.removeEventListener('timeupdate', updateTime);
             newTrack.removeEventListener('ended', handleEnded);
         };
-    }, [index, repeat]);
-    
-    
-    
+    }, [index, repeat, random]);
 
     useEffect(() => {
         if (track) {
@@ -105,13 +99,20 @@ const MusicBar = () => {
     }, [play, track, valueSound]);
 
     const nextTrack = () => {
-        setIndex((prevIndex) => (prevIndex + 1) % musics.length);
+        if (random) {
+            const newIndex = getRandomTrackIndex();
+            setIndex(newIndex);
+        } else {
+            setIndex((prevIndex) => (prevIndex + 1) % musics.length);
+        }
         setCurrentTime(0);
+        setPlay(true); 
     };
 
     const lastTrack = () => {
         setIndex((prevIndex) => (prevIndex - 1 + musics.length) % musics.length);
         setCurrentTime(0);
+        setPlay(true);
     };
 
     const togglePlayPause = () => {
@@ -137,112 +138,115 @@ const MusicBar = () => {
         return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
     };
 
+    const handleRandomToggle = (e) => {
+        e.stopPropagation();
+        setRandom(prevRandom => !prevRandom);
+    };
+
     return (
         <>
             <section className="musicBar" onClick={() => setVision(!vision)}>
-                <input style={{cursor: "pointer"}}
+                <input style={{ cursor: "pointer" }}
                     type="range"
                     className="musicBar__progress"
                     min="0"
                     step="0.05"
                     max={duration}
                     value={currentTime}
-                    onChange={handleTimeChange}/>
+                    onChange={handleTimeChange} />
                 <div className="musicBar__block">
                     <div className="bar">
                         <div className="bar-info">
-                        <p className="bar-info__time">
-                            <span className="start-time">{formatTime(currentTime)}</span> / <span className="full-time">{formatTime(duration)}</span>
-                        </p>
-                        <div ref={containerRef} className="bar-info__name" style={{ overflow: 'hidden', whiteSpace: 'nowrap', position: 'relative', width: "250px" }}>
-                            <span ref={textRef}>
-                                {musics[index].name} / {musics[index].author} &nbsp; &nbsp;
-                            </span>
+                            <p className="bar-info__time">
+                                <span className="start-time">{formatTime(currentTime)}</span> / <span className="full-time">{formatTime(duration)}</span>
+                            </p>
+                            <div ref={containerRef} className="bar-info__name" style={{ overflow: 'hidden', whiteSpace: 'nowrap', position: 'relative', width: "250px" }}>
+                                <span ref={textRef}>
+                                    {musics[index].name} / {musics[index].author} &nbsp; &nbsp;
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div className="bar-nav">
-                        <button type="button" className="bar-nav__randomMusic" onClick={(e) => {
-                            e.stopPropagation();
-                            setRandom(!random);
-                        }}>
-                            <RandomMusic/>
-                        </button>
-                        <div className="navigation">
-                            <button type="button" className="navigation__previous navigation__button" onClick={(e) => {
-                                e.stopPropagation();
-                                lastTrack();
-                            }}>
-                                <BackMusic/>
+                        <div className="bar-nav">
+                            <button type="button"
+                                className={`bar-nav__randomMusic ${random ? 'active' : ''}`}
+                                onClick={handleRandomToggle}>
+                                <RandomMusic />
                             </button>
-                            <button type="button" className="navigation__play navigation__button" onClick={(e) => {
-                                e.stopPropagation();
-                                togglePlayPause();
-                            }}>
-                                {play ? <StopMusic/> : <PlayMusic/>}
-                            </button>
-                            <button type="button" className="navigation__next navigation__button" onClick={(e) => {
-                                e.stopPropagation();
-                                nextTrack();
-                            }}>
-                                <NextMusic/>
+                            <div className="navigation">
+                                <button type="button" className="navigation__previous navigation__button" onClick={(e) => {
+                                    e.stopPropagation();
+                                    lastTrack();
+                                }}>
+                                    <BackMusic />
+                                </button>
+                                <button type="button" className="navigation__play navigation__button" onClick={(e) => {
+                                    e.stopPropagation();
+                                    togglePlayPause();
+                                }}>
+                                    {play ? <StopMusic /> : <PlayMusic />}
+                                </button>
+                                <button type="button" className="navigation__next navigation__button" onClick={(e) => {
+                                    e.stopPropagation();
+                                    nextTrack();
+                                }}>
+                                    <NextMusic />
+                                </button>
+                            </div>
+                            <button
+                                type="button"
+                                className={`bar-nav__repeatMusic ${repeat ? 'active' : ''}`}
+                                onClick={() => setRepeat(!repeat)}
+                            >
+                                <RepeatMusic />
                             </button>
                         </div>
-                        <button
-                            type="button"
-                            className={`bar-nav__repeatMusic ${repeat ? 'active' : ''}`}
-                            onClick={() => setRepeat(!repeat)}
-                        >
-                            <RepeatMusic />
-                        </button>
-                    </div>
-                    <div className="bar-sound">
-                        <button type="button" className="bar-sound__addPlaylist" onClick={(e) => {
-                            e.stopPropagation();
-                        }}>
-                            <AddPlaylist/>
-                        </button>
-                        <div className="sound">
-                            <button type="button" className="sound__image" onClick={(e) => {
-                                e.stopPropagation()
-                                valueSound >= 0.01 ? setValueSound(0) : setValueSound(0.30)
+                        <div className="bar-sound">
+                            <button type="button" className="bar-sound__addPlaylist" onClick={(e) => {
+                                e.stopPropagation();
                             }}>
-                                {valueSound === 0 ? <NotSound/> : ""}
-                                {valueSound >= "0.01" && valueSound <= 0.14 ? <LowSound/> : ""}
-                                {valueSound >= "0.15" && valueSound <= 0.99 ? <MiddleSound/> : ""}
-                                {valueSound === 1 ? <MaxSound/> : ""}
+                                <AddPlaylist />
                             </button>
-                            <input className="sound__progress"
-                                style={{cursor: "pointer"}}
-                                type="range"
-                                value={valueSound}
-                                min="0"
-                                step="0.01"
-                                max="1"
-                                onChange={handleVolumeChange}/>
+                            <div className="sound">
+                                <button type="button" className="sound__image" onClick={(e) => {
+                                    e.stopPropagation();
+                                    valueSound >= 0.01 ? setValueSound(0) : setValueSound(0.30);
+                                }}>
+                                    {valueSound === 0 ? <NotSound /> : ""}
+                                    {valueSound >= "0.01" && valueSound <= 0.14 ? <LowSound /> : ""}
+                                    {valueSound >= "0.15" && valueSound <= 0.99 ? <MiddleSound /> : ""}
+                                    {valueSound === 1 ? <MaxSound /> : ""}
+                                </button>
+                                <input className="sound__progress"
+                                    style={{ cursor: "pointer" }}
+                                    type="range"
+                                    value={valueSound}
+                                    min="0"
+                                    step="0.01"
+                                    max="1"
+                                    onChange={handleVolumeChange} />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-        </section>
-        <Navigation 
-            vision={vision}
-            setVision={setVision}
-            index={index}
-            duration={duration}
-            currentTime={currentTime}
-            handleTimeChange={handleTimeChange}
-            formatTime={formatTime}
-            lastTrack={lastTrack}
-            togglePlayPause={togglePlayPause}
-            play={play}
-            nextTrack={nextTrack}
-            repeat={repeat}
-            setRepeat={setRepeat}
-            random={random}
-            setRandom={setRandom}/>
+            </section>
+            <Navigation
+                vision={vision}
+                setVision={setVision}
+                index={index}
+                duration={duration}
+                currentTime={currentTime}
+                handleTimeChange={handleTimeChange}
+                formatTime={formatTime}
+                lastTrack={lastTrack}
+                togglePlayPause={togglePlayPause}
+                play={play}
+                nextTrack={nextTrack}
+                repeat={repeat}
+                setRepeat={setRepeat}
+                random={random}
+                setRandom={setRandom} />
         </>
     );
 }
- 
+
 export default MusicBar;
