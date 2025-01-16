@@ -5,9 +5,10 @@
   "scripts": {
     "start": "nodemon app.js"
   },
-  "author": "DAniilGordeev",
+  "author": "DaniilGordeev",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.21.1",
     "nodemon": "^3.1.7"
   }

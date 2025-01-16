@@ -1,21 +1,23 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+/* eslint-disable import/no-anonymous-default-export */
+const { resolve } = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 module.exports = {
     mode: 'development',
     entry: './src/index.js', 
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+        filename: 'bundle.[contenthash].js',
+        path: resolve(__dirname, 'dist'),
         publicPath: '/',
     },
     devServer: {
-        static: {
-            directory: path.join(__dirname, 'dist'), 
-        },
         compress: true,
         port: 3000,
         historyApiFallback: true,
+        hot: true,
     },
     module: {
         rules: [
@@ -32,7 +34,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    'style-loader', 
+                    MiniCssExtractPlugin.loader, 
                     'css-loader',   
                     'sass-loader',  
                 ],
@@ -72,9 +74,21 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './public/index.html', 
+            template: './public/index.html',
+            filename: "index.html"
         }),
+        new MiniCssExtractPlugin({
+            filename: "main.[contenthash].css"
+        }),
+        new CleanWebpackPlugin({
+            cleanStaleWebpackAssets: true,
+            verbose: true,
+        })
     ],
+    optimization: {
+        minimize: true,
+        minimizer: [new TerserPlugin()],
+    },
     resolve: {
         extensions: ['.js', '.jsx'], 
     },
