@@ -1,0 +1,60 @@
+@use "../../../../style/App.scss";
+@use "../../../../style/bace/media" as *;
+@use "../../../../style/bace/variable" as *;
+
+label, input[type="checkbox"] {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.block-form {
+    padding: 40px 70px 50px;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        row-gap: 35px;
+        width: 100%;
+
+        input:not([type= "checkbox"]) {
+            width: 100%;
+        }
+
+        .inputPole {
+            padding-block: 11px;
+            border: 1px solid var(--dark);
+            border-radius: 10px;
+            font-size: 18px;
+            transition: 0.4s;
+
+            &:focus {
+                border-color: var(--white);
+                border-radius: 0;
+                border-bottom: 1px solid var(--dark);
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            row-gap: 60px;
+
+            input[type="submit"] {
+                padding-block: 14px;
+                background-color: var(--dark);
+                color: var(--white);
+                text-transform: uppercase;
+                border-radius: 10px;
+                cursor: pointer;
+                border: 1px solid var(--dark);
+                transition: 0.4s;
+
+                &:hover {
+                    background-color: transparent;
+                    color: var(--dark);
+                    border-radius: 13px;
+                }
+            }
+        }
+    }
+}
