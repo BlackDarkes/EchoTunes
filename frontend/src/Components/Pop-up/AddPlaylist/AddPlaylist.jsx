@@ -13,7 +13,7 @@ const AddPlaylist = ({open, setOpen}) => {
                         <div className="add-textblock">
                             <input type="text" id="add-name" name="add-name" className="add-textblock__name" placeholder="Название плейлиста" maxLength={50} required/>
                             <textarea id="add-about" name="add-about" className="add-textblock__description" placeholder="Введите краткое описание" maxLength={140}/>
-                            <input type="submit" className="add-textblock__enter" value="Сохранить" />
+                            <input type="submit" id="save-playlist" className="add-textblock__enter" value="Сохранить" />
                         </div>
                         <div className="add-download">
                             <label htmlFor="download" className="download-block">

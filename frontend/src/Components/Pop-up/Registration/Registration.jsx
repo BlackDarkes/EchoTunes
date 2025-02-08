@@ -6,15 +6,15 @@ const Registration = () => {
             <form action="" method="post" onSubmit={(e) => e.preventDefault()}>
                 <div className="form-name">
                     <label htmlFor="emailUser">Почта:</label><br />
-                    <input type="email" className="inputPole" name="emailUser" id="emailUser" placeholder="Введите почту..."/>
+                    <input type="email" className="inputPole" name="emailUser" id="emailUser" placeholder="Введите почту..." autoComplete="useremail"/>
                 </div>
                 <div className="form-password">
                     <label htmlFor="passUser">Пароль:</label><br />
-                    <input type="password" className="inputPole" name="passUser" id="passUser" placeholder="Введите пароль..."/>
+                    <input type="password" className="inputPole" name="passUser" id="passUser" placeholder="Введите пароль..." autoComplete="new-password"/>
                 </div>
                 <div className="form-repeat">
                     <label htmlFor="repeatPass">Повторите пароль:</label><br />
-                    <input type="password" className="inputPole" name="repeatPass" id="repeatPass" placeholder="Повторите пароль..."/>
+                    <input type="password" className="inputPole" name="repeatPass" id="repeatPass" placeholder="Повторите пароль..." autoComplete="new-password"/>
                 </div>
                 <div className="buttons">
                     <div className="form-box">

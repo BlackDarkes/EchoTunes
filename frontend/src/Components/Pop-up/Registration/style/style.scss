@@ -2,6 +2,11 @@
 @use "../../../../style/bace/media" as *;
 @use "../../../../style/bace/variable" as *;
 
+label {
+    @include laptop() {
+        color: #14171A;
+    }
+}
 
 .pop-up {
     display: flex;
@@ -24,10 +29,20 @@
         top: 50px;
         left: 80px;
         color: var(--white);
+
+        @include tabs() {
+            top: 50px;
+            left: 40px;
+        }
+
+        @include mobile() {
+            left: 20px;
+        }
     }
 
     .block {
         width: 32%;
+        min-width: 600px;
 
         &-header {
             display: flex;
@@ -40,6 +55,10 @@
 
             &__title {
                 font-size: 36px;
+
+                @include laptop() {
+                    font-size: 32px;
+                }
             }
 
             &__text {
@@ -49,9 +68,10 @@
                     text-decoration: underline;
                     transition: 0.4s;
 
-                    &:hover {
+                    @include hover() {
                         color: var(--white);
                         text-decoration: none;
+                        
                     }
                 }
             }
@@ -59,6 +79,19 @@
 
         &-body {
             background-color: var(--white);
+
+            .form-password {
+                .forgo-password {
+                    display: flex;
+                    justify-content: flex-end;
+                }
+                
+            }
+        }
+
+        @include laptop() {
+            width: 60%;
+            min-width: 390px;
         }
     }
     &.active {
